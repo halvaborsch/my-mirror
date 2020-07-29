@@ -25,13 +25,19 @@ after_script:
   - echo "For example you might do some cleanup here"
 
 sync:
+  variables:
+    GIT_STRATEGY: clone
   rules:
     - if: '$GITHUBREMOTEHOOK == "true"'
       allow_failure: true
   image: alpine:git
   stage: sync
   script:
-    - sleep 900
+    - echo "$GITHUB_READONLY_KEY" > github.key
+    - git fetch -f -t -P --all
+    - git remote add -f --tags --mirror=fetch github git@github.com:halvaborsch/my-mirror.git
+    - GIT_SSH_COMMAND='ssh -i github.key -o IdentitiesOnly=yes' git remote add -f --tags --mirror=fetch github git@github.com:halvaborsch/my-mirror.git
+    - git push -v --all origin
 
 build1:
   stage: build
