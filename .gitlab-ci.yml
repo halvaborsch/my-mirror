@@ -18,6 +18,15 @@ after_script:
   - echo "After script section"
   - echo "For example you might do some cleanup here"
 
+sync:
+  rules:
+    - if: '$GITHUBREMOTEHOOK == "true"'
+      allow_failure: true
+  image: alpine:git
+  stage: sync
+  script:
+    - sleep 900
+
 build1:
   stage: build
   script:
