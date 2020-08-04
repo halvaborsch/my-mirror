@@ -43,6 +43,7 @@ sync:
     - GIT_SSH_COMMAND='ssh -i github.key -o IdentitiesOnly=yes' git remote add -f --tags --mirror=fetch github git@github.com:halvaborsch/my-mirror.git
     - git push -v --all origin
   after_script:
+    - sleep 600
     - rm github.key
 
 build1:
