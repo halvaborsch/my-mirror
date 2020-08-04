@@ -36,13 +36,13 @@ sync:
   stage: sync
   script:
     - git fetch -f -t -P --all
-    - if [[ "$( git rev-parse remotes/origin/${GITHUBHOOKREF} )" == "$( git rev-parse ${GITHUBHOOKAFTER})" ]]; then
-        echo "Branch ${GITHUBHOOKREF} is up to date we'll skip the sync."; exit 0; 
+    - if [[ "$( git rev-parse remotes/origin/${GITHUBREF} )" == "$( git rev-parse ${GITHUBREFAFTER})" ]]; then
+        echo "Branch ${GITHUBREF} is up to date we'll skip the sync."; exit 0; 
       fi
     - git remote add -f --tags github git@github.com:halvaborsch/my-mirror.git
-    - if [[ "$( git rev-parse HEAD )" == "$( git rev-parse ${GITHUBHOOKBEFORE})" ]]; then
+    - if [[ "$( git rev-parse remotes/origin/${GITHUBREF} )" == "$( git rev-parse ${GITHUBREFBEFORE})" ]]; then
         echo "Making clear push"; 
-        git push -v --tags remotes/github/${GITHUBHOOKREF} remotes/origin/${GITHUBHOOKREF}
+        git push -v --tags remotes/github/${GITHUBREF} remotes/origin/${GITHUBREF}
         exit $?;
       fi
   before_script:
