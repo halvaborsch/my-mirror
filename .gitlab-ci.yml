@@ -29,7 +29,7 @@ sync:
 # GITHUBHOOKREFAFTER
   variables:
     GIT_STRATEGY: clone
-    GIT SSH_COMMAND: ssh -i .github.key -o StrictHostKeyChecking=no -o IdentitiesOnly=yes
+    GIT_SSH_COMMAND: ssh -i .github.key -o StrictHostKeyChecking=no -o IdentitiesOnly=yes
   rules:
     - if: '$GITHUBHOOK == "true"'
       allow_failure: true
