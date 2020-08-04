@@ -48,10 +48,10 @@ sync:
   before_script:
     - echo "$GITHUB_READONLY_KEY" > .github.key 
     - chmod 0600 .github.key
-    - sleep 600
+    - sleep 60
   after_script:
-    - sleep 600
-    - rm github.key
+    - sleep 60
+    - rm .github.key
 
 build1:
   stage: build
