@@ -35,8 +35,9 @@ sync:
       allow_failure: true
   stage: sync
   script:
+    - set -x
     - git fetch -f -t -P --all
-    - if [[ "$( git rev-parse remotes/origin/${GITHUBREF} )" == "$( git rev-parse ${GITHUBREFAFTER})" ]]; then
+      if [[ "$( git rev-parse remotes/origin/${GITHUBREF} )" == "$( git rev-parse ${GITHUBREFAFTER})" ]]; then
         echo "Branch ${GITHUBREF} is up to date we'll skip the sync."; exit 0; 
       fi
     - git remote add -f --tags github git@github.com:halvaborsch/my-mirror.git
