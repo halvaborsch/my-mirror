@@ -37,7 +37,8 @@ sync:
   image: alpine:git
   stage: sync
   script:
-    - echo "$GITHUB_READONLY_KEY" > github.key
+    - echo "$GITHUB_READONLY_KEY" > github.key 
+    - chmod 0600 github.key
     - git fetch -f -t -P --all
     - GIT_SSH_COMMAND='ssh -i github.key -o IdentitiesOnly=yes' git remote add -f --tags --mirror=fetch github git@github.com:halvaborsch/my-mirror.git
     - git push -v --all origin
