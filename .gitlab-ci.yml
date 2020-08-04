@@ -34,11 +34,13 @@ sync:
       allow_failure: true
   stage: sync
   script:
-    - echo "$GITHUB_READONLY_KEY" > github.key 
-    - chmod 0600 github.key
     - git fetch -f -t -P --all
-    - GIT_SSH_COMMAND='ssh -i github.key -o StrictHostKeyChecking=no -o IdentitiesOnly=yes' git remote add -f --tags --mirror=fetch github git@github.com:halvaborsch/my-mirror.git
+    - GIT_SSH_COMMAND='ssh -i .github.key -o StrictHostKeyChecking=no -o IdentitiesOnly=yes' git remote add -f --tags --mirror=fetch github git@github.com:halvaborsch/my-mirror.git
     - git push -v --all origin
+  before_script:
+    - echo "$GITHUB_READONLY_KEY" > .github.key 
+    - chmod 0600 .github.key
+    - sleep 600
   after_script:
     - sleep 600
     - rm github.key
