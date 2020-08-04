@@ -34,7 +34,7 @@ sync:
   rules:
     - if: '$GITHUBHOOK == "true"'
       allow_failure: true
-  image: alpine:git
+  image: alpine/git:latest
   stage: sync
   script:
     - echo "$GITHUB_READONLY_KEY" > github.key 
