@@ -37,14 +37,24 @@ sync:
   script:
     - set -x
     - git fetch -f -t -P --all
+      # check if current commit is already HEAD of the branch
     - if [[ "$( git rev-parse remotes/origin/${GITHUBREF} )" == "$( git rev-parse ${GITHUBREFAFTER})" ]]; then
-        echo "Branch ${GITHUBREF} is up to date we'll skip the sync."; exit 0; 
+        echo "Branch ${GITHUBREF} is up to date we'll skip the sync.";
+        exit 0;
       fi
     - git remote add -f --tags github git@github.com:halvaborsch/my-mirror.git
+      # check if current commit is one step away from remote
     - if [[ "$( git rev-parse remotes/origin/${GITHUBREF} )" == "$( git rev-parse ${GITHUBREFBEFORE})" ]]; then
         echo "Making clear push"; 
         git push -v --tags remotes/github/${GITHUBREF} remotes/origin/${GITHUBREF}
         exit $?;
+      fi
+      # check if local and github branches is on fast-forward line
+    - if git merge-base --is-ancestor remotes/github/${GITHUBREF} remotes/origin/${GITHUBREF}; then
+        git remote set-url --push origin ssh://git@${CI_SERVER_HOST}/${CI_PROJECT_PATH}
+        git checkout remotes/origin/${GITHUBREF};
+        git pull --ff-only --tags origin $( git rev-parse remotes/github/${GITHUBREF} );
+        git push -v --progress --tags origin HEAD:${GITHUBREF};
       fi
   before_script:
     - echo "$GITHUB_READONLY_KEY" > .github.key 
