@@ -7,7 +7,7 @@ default:
     - shell-exec
 
 stages:
-  - sync
+  - github-sync
   - build
   - test
   - deploy
@@ -23,10 +23,10 @@ after_script:
   - echo "For example you might do some cleanup here"
 
 GitHub Sync Job:
-include:
-  - project: 'continuous-delivery/ggw'
-    ref: IO-6598_gitlabci_job
-    file: '/gitlab-ci-sync-job.yml'
+  include:
+    - project: 'continuous-delivery/ggw'
+      ref: IO-6598_gitlabci_job
+      file: '/gitlab-ci-sync-job.yml'
 
 build1:
   stage: build
