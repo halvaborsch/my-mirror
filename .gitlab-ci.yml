@@ -57,7 +57,7 @@ sync:
         git push -v --progress --tags origin HEAD:${GITHUBREF};
       fi
   before_script:
-    - echo "$GITHUB_READONLY_KEY" > .github.key 
+    - echo "$GITHUB_SYNC_KEY" > .github.key 
     - chmod 0600 .github.key
   after_script:
     - sleep 60
