@@ -43,20 +43,15 @@ sync:
         exit 0;
       fi
     - git remote add -f --tags github git@github.com:halvaborsch/my-mirror.git
-      # check if current commit is one step away from remote
-    - if [[ "$( git rev-parse remotes/origin/${GITHUBREF} )" == "$( git rev-parse ${GITHUBREFBEFORE})" ]]; then
-        echo "Making clear push"; 
-        git checkout remotes/origin/${GITHUBREF};
-        git pull --ff-only --tags origin $( git rev-parse remotes/github/${GITHUBREF} );
-        git push -v --progress --tags origin HEAD:${GITHUBREF};
-        exit $?;
-      fi
+    - git remote set-url --push origin ssh://git@${CI_SERVER_HOST}/${CI_PROJECT_PATH}
       # check if local and github branches is on fast-forward line
     - if git merge-base --is-ancestor remotes/github/${GITHUBREF} remotes/origin/${GITHUBREF}; then
-        git remote set-url --push origin ssh://git@${CI_SERVER_HOST}/${CI_PROJECT_PATH}
         git checkout remotes/origin/${GITHUBREF};
         git pull --ff-only --tags origin $( git rev-parse remotes/github/${GITHUBREF} );
         git push -v --progress --tags origin HEAD:${GITHUBREF};
+      else
+        echo "Local and github branches'${GITHUBREF}' is not on the same line. Please resolve conflics manualy.";
+        exit 1
       fi
   before_script:
     - echo "$GITHUB_SYNC_KEY" > .github.key 
