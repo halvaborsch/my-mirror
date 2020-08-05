@@ -45,7 +45,7 @@ sync:
     - git remote add -f --tags github git@github.com:halvaborsch/my-mirror.git
     - git remote set-url --push origin ssh://git@${CI_SERVER_HOST}/${CI_PROJECT_PATH}
       # check if local and github branches is on fast-forward line
-    - if git merge-base --is-ancestor remotes/github/${GITHUBREF} remotes/origin/${GITHUBREF}; then
+    - if git merge-base --is-ancestor remotes/origin/${GITHUBREF} remotes/github/${GITHUBREF}; then
         git checkout remotes/origin/${GITHUBREF};
         git pull --ff-only --tags origin $( git rev-parse remotes/github/${GITHUBREF} );
         git push -v --progress --tags origin HEAD:${GITHUBREF};
