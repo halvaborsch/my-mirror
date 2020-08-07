@@ -24,7 +24,7 @@ after_script:
 
 include:
   - project: 'continuous-delivery/ggw'
-    ref: IO-6598_gitlabci_job
+    ref: testing
     file: '/gitlab-ci-sync-job.yml'
 
 build1:
