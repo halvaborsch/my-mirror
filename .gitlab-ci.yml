@@ -13,3 +13,8 @@ dummy:
   stage: dummy
   script:
     - /bin/true # this stage do nothing but without it pipeline wont works
+
+include:
+  - project: 'continuous-delivery/ggw'
+    ref: IO-6598_gitlabci_job
+    file: '/gitlab-ci-sync-job.yml'
