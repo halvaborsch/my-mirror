@@ -13,8 +13,7 @@ dummy:
   stage: dummy
   script:
     - /bin/true # this stage do nothing but without it pipeline wont works
-  only: 
-    - master
+  when: manual
 
 include:
   - project: 'continuous-delivery/ggw'
