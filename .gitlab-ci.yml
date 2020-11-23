@@ -17,5 +17,5 @@ dummy:
 
 include:
   - project: 'continuous-delivery/ggw'
-    ref: IO-6598_gitlabci_job
+    ref: IO-6745_ci_pipelines
     file: '/gitlab-ci-sync-job.yml'
