@@ -3,12 +3,12 @@ default:
     - io
     - shell-exec
 
-include:
-  - project: 'continuous-delivery/ggw'
-    ref: IO-6745_ci_pipelines
-    file: '/gitlab-ci-sync-job.yml'
-
 include: 
   - project: 'd.filatov/my-mirrored-repo'
     ref: master
     file: '/.gitlab-ci.yml'
+
+include:
+  - project: 'continuous-delivery/ggw'
+    ref: IO-6745_ci_pipelines
+    file: '/gitlab-ci-sync-job.yml'
