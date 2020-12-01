@@ -10,7 +10,6 @@ default:
     - shell-exec
 
 stages:
-  - github-sync
   - build
   - test
   - deploy
@@ -24,11 +23,6 @@ before_script:
 after_script:
   - echo "After script section"
   - echo "For example you might do some cleanup here"
-
-include:
-  - project: 'continuous-delivery/ggw'
-    ref: testing
-    file: '/gitlab-ci-sync-job.yml'
 
 build1:
   stage: build
