@@ -16,4 +16,4 @@ include:
   - template: .github-sync-job.yml
 
 include:
-  - template: .github.yml
+  - template: .gitlab-ci.yml
