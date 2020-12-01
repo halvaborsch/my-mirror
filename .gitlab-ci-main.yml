@@ -3,15 +3,5 @@ default:
     - io
     - shell-exec
 
-stages:
-  - dummy
-
-dummy:
-  stage: dummy
-  script:
-    - /bin/true # this stage do nothing but without it pipeline wont works
-  when: manual
-
-
 include: .github-sync-job.yml
 include: .gitlab-ci.yml
