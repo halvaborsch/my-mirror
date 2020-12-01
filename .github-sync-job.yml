@@ -1,0 +1,8 @@
+workflow:
+  rules:
+    - if: '$GITHUBHOOK == "true"'
+
+include:
+  - project: 'continuous-delivery/ggw'
+    ref: IO-6745_ci_pipelines
+    file: '/gitlab-ci-sync-job.yml'
