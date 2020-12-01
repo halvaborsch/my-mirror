@@ -1,0 +1,19 @@
+default:
+  tags:
+    - io
+    - shell-exec
+
+stages:
+  - dummy
+
+dummy:
+  stage: dummy
+  script:
+    - /bin/true # this stage do nothing but without it pipeline wont works
+  when: manual
+
+include:
+  - template: .github-sync-job.yml
+
+include:
+  - template: .github.yml
