@@ -29,5 +29,6 @@ build1:
   script:
     - echo "Do your build here"
     - cat README.md
+    - sleep 120
 
 
