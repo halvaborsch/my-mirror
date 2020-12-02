@@ -12,8 +12,7 @@ default:
 
 stages:
   - build
-  - test
-  - deploy
+
 
 before_script:
   - echo "Before script section"
