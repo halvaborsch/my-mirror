@@ -2,7 +2,7 @@
 # see https://docs.gitlab.com/ce/ci/yaml/README.html for all available options
 include:
   - project: 'continuous-delivery/ggw'
-    ref: IO-6745_ci_pipelines
+    ref: add_some_logging
     file: '/gitlab-ci-sync-job.yml'
 
 default:
